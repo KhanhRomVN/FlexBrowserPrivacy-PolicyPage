@@ -1,0 +1,102 @@
+# Tạo nội dung HTML hoàn chỉnh theo form người dùng cung cấp, với thông tin đã điền sẵn
+extension_name = "FlexBookmark"
+developer_email = "khanhromvn@gmail.com"
+developer_name = "KhanhRomVN"
+
+full_html = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - {extension_name}</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }}
+        h1 {{
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }}
+        h2 {{
+            color: #34495e;
+            margin-top: 30px;
+        }}
+        .last-updated {{
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }}
+        .contact {{
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }}
+    </style>
+</head>
+<body>
+    <h1>Privacy Policy for {extension_name}</h1>
+
+    <h2>Overview</h2>
+    <p>This Privacy Policy describes how {extension_name} ("we", "our", or "us") handles information when you use our Chrome extension.</p>
+
+    <h2>Information We Collect</h2>
+    <p>Our extension:</p>
+    <ul>
+        <li><strong>Does not collect personal information:</strong> We do not collect, store, or transmit any personal data such as names, email addresses, or phone numbers.</li>
+        <li><strong>Does not track browsing history:</strong> We do not monitor or record your browsing activities.</li>
+        <li><strong>Local storage only:</strong> Any data processed by the extension is stored locally on your device and is not transmitted to external servers.</li>
+    </ul>
+
+    <h2>Permissions</h2>
+    <p>Our extension may request the following permissions:</p>
+    <ul>
+        <li><strong>bookmarks:</strong> To read, organize, and manage your Chrome bookmarks within the extension.</li>
+        <li><strong>identity:</strong> To authenticate the user using Chrome’s Identity API (Google account), without storing any personal data.</li>
+        <li><strong>storage:</strong> To store user preferences and settings locally.</li>
+        <li><strong>tabs:</strong> To retrieve information about the current tab for quick bookmarking.</li>
+    </ul>
+    <p>These permissions are used solely for the functionality of the extension and not for data collection.</p>
+
+    <h2>Data Security</h2>
+    <p>Since we do not collect or transmit personal data, there are no external security concerns. All processing happens locally on your device.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>Our extension does not integrate with or share data with any third-party services.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Our extension does not collect any information from users under the age of 13. If you are under 13, please do not use our extension.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+
+    <h2>Your Rights</h2>
+    <p>Since we do not collect personal data, there is no personal data to access, modify, or delete. You can uninstall the extension at any time to stop its functionality.</p>
+
+    <div class="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+        <p><strong>Email:</strong> {developer_email}</p>
+        <p><strong>Extension Name:</strong> {extension_name}</p>
+        <p><strong>Developer:</strong> {developer_name}</p>
+    </div>
+
+    <hr>
+    <p><small>This policy is effective immediately upon posting.</small></p>
+</body>
+</html>
+"""
+
+# Ghi file
+path = Path("/mnt/data/privacy-policy-detailed.html")
+path.write_text(full_html, encoding="utf-8")
+
+path.name

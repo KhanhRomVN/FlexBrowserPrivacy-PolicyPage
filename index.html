@@ -1,102 +1,327 @@
-# Tạo nội dung HTML hoàn chỉnh theo form người dùng cung cấp, với thông tin đã điền sẵn
-extension_name = "FlexBookmark"
-developer_email = "khanhromvn@gmail.com"
-developer_name = "KhanhRomVN"
-
-full_html = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - {extension_name}</title>
+    <title>Privacy Policy - FlexBookmark</title>
     <style>
-        body {{
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            color: #333;
-        }}
-        h1 {{
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
             color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }}
-        h2 {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin: 35px 0 20px 0;
+            font-weight: 600;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 1rem;
             color: #34495e;
+            text-align: justify;
+        }
+
+        ul {
+            margin: 16px 0;
+            padding-left: 0;
+        }
+
+        li {
+            background: #f8f9ff;
+            margin: 12px 0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            list-style: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+        }
+
+        li strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact h2 {
+            color: white;
+            margin-top: 0;
+            padding-left: 0;
+        }
+
+        .contact h2::before {
+            display: none;
+        }
+
+        .contact p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .contact strong {
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
             margin-top: 30px;
-        }}
-        .last-updated {{
-            background-color: #ecf0f1;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }}
-        .contact {{
-            background-color: #e8f5e8;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 30px;
-        }}
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+            opacity: 0.8;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            li {
+                padding: 12px 15px;
+            }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Privacy Policy for {extension_name}</h1>
+    <div class="container">
+        <div class="header">
+            <h1>🔖 FlexBookmark</h1>
+            <p class="subtitle">Privacy Policy</p>
+            <div class="last-updated">
+                📅 Last updated: August 5, 2025
+            </div>
+        </div>
 
-    <h2>Overview</h2>
-    <p>This Privacy Policy describes how {extension_name} ("we", "our", or "us") handles information when you use our Chrome extension.</p>
+        <div class="section">
+            <h2>🔍 Overview</h2>
+            <p>This Privacy Policy describes how FlexBookmark ("we", "our", or "us") handles information when you use our Chrome extension. We are committed to protecting your privacy and ensuring transparency in our data practices.</p>
+        </div>
 
-    <h2>Information We Collect</h2>
-    <p>Our extension:</p>
-    <ul>
-        <li><strong>Does not collect personal information:</strong> We do not collect, store, or transmit any personal data such as names, email addresses, or phone numbers.</li>
-        <li><strong>Does not track browsing history:</strong> We do not monitor or record your browsing activities.</li>
-        <li><strong>Local storage only:</strong> Any data processed by the extension is stored locally on your device and is not transmitted to external servers.</li>
-    </ul>
+        <div class="section">
+            <h2>📊 Information We Collect</h2>
+            <div class="highlight-box">
+                <p><strong>FlexBookmark is designed with privacy in mind:</strong></p>
+            </div>
+            <ul>
+                <li><strong>❌ No Personal Information:</strong> We do not collect, store, or transmit any personal data such as names, email addresses, or phone numbers.</li>
+                <li><strong>❌ No Browsing History Tracking:</strong> We do not monitor or record your browsing activities or website visits.</li>
+                <li><strong>💾 Local Storage Only:</strong> Any data processed by the extension is stored locally on your device and is never transmitted to external servers.</li>
+                <li><strong>🔒 Zero Data Collection:</strong> We have no servers, databases, or analytics tracking your usage.</li>
+            </ul>
+        </div>
 
-    <h2>Permissions</h2>
-    <p>Our extension may request the following permissions:</p>
-    <ul>
-        <li><strong>bookmarks:</strong> To read, organize, and manage your Chrome bookmarks within the extension.</li>
-        <li><strong>identity:</strong> To authenticate the user using Chrome’s Identity API (Google account), without storing any personal data.</li>
-        <li><strong>storage:</strong> To store user preferences and settings locally.</li>
-        <li><strong>tabs:</strong> To retrieve information about the current tab for quick bookmarking.</li>
-    </ul>
-    <p>These permissions are used solely for the functionality of the extension and not for data collection.</p>
+        <div class="section">
+            <h2>🔐 Permissions Required</h2>
+            <p>Our extension requests the following Chrome permissions for functionality:</p>
+            <ul>
+                <li><strong>📚 Bookmarks:</strong> To read, organize, and manage your Chrome bookmarks within the extension interface.</li>
+                <li><strong>👤 Identity:</strong> To authenticate users using Chrome's Identity API (Google account) for bookmark synchronization, without storing any personal data.</li>
+                <li><strong>💾 Storage:</strong> To store user preferences and extension settings locally on your device.</li>
+                <li><strong>🗂️ Tabs:</strong> To retrieve information about the current tab for quick bookmarking functionality.</li>
+            </ul>
+            <p><em>These permissions are used exclusively for extension functionality and never for data collection or tracking.</em></p>
+        </div>
 
-    <h2>Data Security</h2>
-    <p>Since we do not collect or transmit personal data, there are no external security concerns. All processing happens locally on your device.</p>
+        <div class="section">
+            <h2>🛡️ Data Security</h2>
+            <p>Since FlexBookmark does not collect, store, or transmit any personal data to external servers, there are minimal security concerns. All bookmark processing and organization happens locally on your device using Chrome's built-in APIs.</p>
+        </div>
 
-    <h2>Third-Party Services</h2>
-    <p>Our extension does not integrate with or share data with any third-party services.</p>
+        <div class="section">
+            <h2>🌐 Third-Party Services</h2>
+            <p>FlexBookmark operates completely independently and does not integrate with, share data with, or connect to any third-party services, analytics platforms, or external APIs.</p>
+        </div>
 
-    <h2>Children's Privacy</h2>
-    <p>Our extension does not collect any information from users under the age of 13. If you are under 13, please do not use our extension.</p>
+        <div class="section">
+            <h2>👶 Children's Privacy</h2>
+            <p>Our extension does not collect any information from users of any age. FlexBookmark is safe for users under 13, as no personal data collection occurs.</p>
+        </div>
 
-    <h2>Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+        <div class="section">
+            <h2>📝 Changes to This Policy</h2>
+            <p>We may update this Privacy Policy occasionally to reflect changes in our extension or legal requirements. Any updates will be posted on this page with a revised date. We recommend checking this policy periodically.</p>
+        </div>
 
-    <h2>Your Rights</h2>
-    <p>Since we do not collect personal data, there is no personal data to access, modify, or delete. You can uninstall the extension at any time to stop its functionality.</p>
+        <div class="section">
+            <h2>⚖️ Your Rights</h2>
+            <p>Since FlexBookmark does not collect any personal data, there is no personal information to access, modify, or delete. You maintain complete control by:</p>
+            <ul>
+                <li><strong>🗑️ Uninstalling:</strong> Remove the extension at any time to stop all functionality</li>
+                <li><strong>⚙️ Managing Permissions:</strong> Revoke specific permissions through Chrome's extension settings</li>
+                <li><strong>🔄 Local Control:</strong> All your bookmark data remains under your complete control</li>
+            </ul>
+        </div>
 
-    <div class="contact">
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-        <p><strong>Email:</strong> {developer_email}</p>
-        <p><strong>Extension Name:</strong> {extension_name}</p>
-        <p><strong>Developer:</strong> {developer_name}</p>
+        <div class="contact">
+            <h2>📧 Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or FlexBookmark, please don't hesitate to contact us:</p>
+            <p><strong>📬 Email:</strong> khanhromvn@gmail.com</p>
+            <p><strong>🔖 Extension Name:</strong> FlexBookmark</p>
+            <p><strong>👨‍💻 Developer:</strong> KhanhRomVN</p>
+            <p><strong>🌐 GitHub:</strong> github.com/KhanhRomVN</p>
+        </div>
+
+        <div class="footer">
+            <p>This privacy policy is effective immediately upon posting. FlexBookmark v1.0 • Made with ❤️ for Chrome users</p>
+        </div>
     </div>
-
-    <hr>
-    <p><small>This policy is effective immediately upon posting.</small></p>
 </body>
 </html>
-"""
-
-# Ghi file
-path = Path("/mnt/data/privacy-policy-detailed.html")
-path.write_text(full_html, encoding="utf-8")
-
-path.name
